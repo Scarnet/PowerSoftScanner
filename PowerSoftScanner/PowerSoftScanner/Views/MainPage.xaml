@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:resources="clr-namespace:PowerSoftScanner.Resources"
+             xmlns:templates="clr-namespace:PowerSoftScanner.Templates"
+             x:Class="PowerSoftScanner.Views.MainPage">
+
+    <ContentPage.Content>
+        <StackLayout>
+            <Image Source="barcode" />
+
+            <Button Text="{Static resources:Resources.Scan}" Command="{Binding StartScanning}" />
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

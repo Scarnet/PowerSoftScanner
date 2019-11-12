@@ -22,7 +22,7 @@ namespace Infrastructure.Providers
         {
             this.semaphore = new SemaphoreSlim(httpclientPoolSize);
         }
-        public async Task<BaseResponse<T>> Get<T>(HttpRequest request)
+        public async Task<T> Get<T, L>(HttpRequest request) where T : BaseResponse<L>
         {
             var client = await GetHttpClient(request.Headers);
             var builder = new UriBuilder(request.Url);
@@ -35,23 +35,22 @@ namespace Infrastructure.Providers
 
             var response = await client.GetAsync(builder.ToString());
 
-            return await ParseHttpResponse<T>(response);
+            return await ParseHttpResponse<T, L>(response);
         }
-
-        public Task<BaseResponse<T>> Post<T>(HttpRequest request)
+        public Task<T> Post<T, L>(HttpRequest request) where T : BaseResponse<L>
         {
             throw new NotImplementedException();
         }
 
-        public Task<BaseResponse<T>> Put<T>(HttpRequest request)
+        public Task<T> Put<T, L>(HttpRequest request) where T : BaseResponse<L>
         {
             throw new NotImplementedException();
         }
 
-        private async Task<BaseResponse<T>> ParseHttpResponse<T>(HttpResponseMessage response)
+        private async Task<T> ParseHttpResponse<T, L>(HttpResponseMessage response) where T : BaseResponse<L>
         {
             string responseStr = await response.Content.ReadAsStringAsync();
-            var baseResponse = JsonConvert.DeserializeObject<BaseResponse<T>>(responseStr);
+            var baseResponse = JsonConvert.DeserializeObject<T>(responseStr);
             return baseResponse;
         }
         private async Task<HttpClient> GetHttpClient(Dictionary<string, string> headers)
@@ -60,10 +59,12 @@ namespace Infrastructure.Providers
 
             var client = new HttpClient();
 
-            foreach (var header in headers)
-                client.DefaultRequestHeaders.Add(header.Key, header.Value);
+            if (headers != null)
+                foreach (var header in headers)
+                    client.DefaultRequestHeaders.Add(header.Key, header.Value);
 
             return client;
         }
+
     }
 }

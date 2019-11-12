@@ -9,9 +9,24 @@ namespace Infrastructure.Interfaces
 {
     public interface INetworkProvider
     {
-        Task<BaseResponse<T>> Get<T>(HttpRequest request);
-        Task<BaseResponse<T>> Post<T>(HttpRequest request);
-        Task<BaseResponse<T>> Put<T>(HttpRequest request);
+        /// <summary>
+        /// Perform GET operation
+        /// </summary>
+        /// <typeparam name="T">Response object</typeparam>
+        /// <typeparam name="L">Business object</typeparam>
+        Task<T> Get<T, L>(HttpRequest request) where T : BaseResponse<L>;
+        /// <summary>
+        /// Perform POST operation
+        /// </summary>
+        /// <typeparam name="T">Response object</typeparam>
+        /// <typeparam name="L">Business object</typeparam>
+        Task<T> Post<T, L>(HttpRequest request) where T : BaseResponse<L>;
+        /// <summary>
+        /// Perform PUT operation
+        /// </summary>
+        /// <typeparam name="T">Response object</typeparam>
+        /// <typeparam name="L">Business object</typeparam>
+        Task<T> Put<T, L>(HttpRequest request) where T : BaseResponse<L>;
 
     }
 }
