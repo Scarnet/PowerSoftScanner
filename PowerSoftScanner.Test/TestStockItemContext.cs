@@ -43,9 +43,15 @@ namespace Tests
         [Test]
         public void TestItemNotFound()
         {
-            var item =
             Assert.Catch( () =>  stockItemContext.GetStockItem("ADID465-TESTttt").Wait());
         }
+
+        [Test]
+        public void TestNullCode()
+        {
+            Assert.Catch(() => stockItemContext.GetStockItem(null).Wait());
+        }
+
     }
 }
 

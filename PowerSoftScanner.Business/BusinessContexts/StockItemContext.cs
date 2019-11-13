@@ -8,6 +8,7 @@ using PowerSoftScanner.Business.Models.ApiResponse;
 using PowerSoftScanner.Business.Models.Business;
 using PowerSoftScanner.Business.Models.Dtos;
 using PowerSoftScanner.Business.PipeNodes;
+using PowerSoftScanner.Business.Validators;
 using PowerSoftScanner.Configurations;
 using System;
 using System.Collections.Generic;
@@ -26,6 +27,11 @@ namespace PowerSoftScanner.Business.BusinessContexts
 
         public async Task<List<StockItem>> GetStockItem(string code)
         {
+            bool valid = NullObjectValidator.Validate(code);
+
+            if (!valid)
+                throw new ArgumentException("Invalid code has been passed to the context");
+
             var nodes = new IPipelineNode[] { new StockItemPipeNode(NetworkProvider, code), new StockModelPipeNode(NetworkProvider, code) };
             pipeline.SetNodes(nodes);
             var payload = (StockItemResponse)await pipeline.StartAsync();
