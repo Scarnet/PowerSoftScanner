@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<DataTemplate xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="PowerSoftScanner.Templates.StockItemTemplate">
+
+    <ViewCell>
+        <StackLayout Margin="10">
+            <StackLayout  Orientation="Horizontal" Spacing="5">
+                <Label Text="{Binding Name}" />
+                <Label Style="{StaticResource ListLabel}" HorizontalOptions="EndAndExpand" Text="{Binding Stock, StringFormat='{0:N}'}"/>
+            </StackLayout >
+            <StackLayout Orientation="Horizontal" Spacing="5">
+                <Label Style="{StaticResource ListLabel}" Text="{Binding SizeName}" />
+                <BoxView HorizontalOptions="EndAndExpand" HeightRequest="20" WidthRequest="20" 
+                         BackgroundColor="{Binding ColorHex, Converter={StaticResource InvalidColorConverter}}" />
+            </StackLayout>
+        </StackLayout>
+    </ViewCell>
+</DataTemplate>

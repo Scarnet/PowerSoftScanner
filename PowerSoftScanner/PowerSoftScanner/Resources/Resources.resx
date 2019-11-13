@@ -117,7 +117,16 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="GettingData" xml:space="preserve">
+    <value>Getting data</value>
+  </data>
   <data name="Scan" xml:space="preserve">
     <value>Scan</value>
+  </data>
+  <data name="ScanNow" xml:space="preserve">
+    <value>Scan now</value>
+  </data>
+  <data name="StoresList" xml:space="preserve">
+    <value>Stores list</value>
   </data>
 </root>

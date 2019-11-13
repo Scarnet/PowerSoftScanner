@@ -1,8 +1,15 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<Application xmlns="http://xamarin.com/schemas/2014/forms"
+<prism:PrismApplication 
+             xmlns:prism="clr-namespace:Prism.Unity;assembly=Prism.Unity.Forms" 
+             xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="PowerSoftScanner.App">
-    <Application.Resources>
+    xmlns:powersoftscanner="clr-namespace:PowerSoftScanner"
+    x:Class="PowerSoftScanner.App">
+    <prism:PrismApplication.Resources>
+        <powersoftscanner:InvalidColorConverter x:Key="InvalidColorConverter" />
 
-    </Application.Resources>
-</Application>
+        <Style x:Key="ListLabel" TargetType="Label">
+            <Setter Property="VerticalTextAlignment" Value="Center" />
+        </Style>
+    </prism:PrismApplication.Resources>
+</prism:PrismApplication>

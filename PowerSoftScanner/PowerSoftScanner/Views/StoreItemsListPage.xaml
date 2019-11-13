@@ -2,21 +2,23 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:templates="clr-namespace:PowerSoftScanner.Templates"
-             x:Class="PowerSoftScanner.Views.StoreListPage"
+             x:Class="PowerSoftScanner.Views.StoreItemsListPage"
              xmlns:resources="clr-namespace:PowerSoftScanner.Resources"
-             Title="{Static resources:Resources.StoresList}">
+             Title="{Binding StoreName}">
 
     <ContentPage.ToolbarItems>
         <ToolbarItem Text="{Static resources:Resources.Scan}" Command="{Binding ScanCommand}" />
     </ContentPage.ToolbarItems>
 
     <ContentPage.Resources>
-        <templates:StoreTemplate x:Key="StoreTemplate" />
+        <ResourceDictionary>
+            <templates:StockItemTemplate x:Key="Template" />
+        </ResourceDictionary>
     </ContentPage.Resources>
-
     <ContentPage.Content>
         <StackLayout>
-            <ListView ItemTemplate="{StaticResource StoreTemplate}" HasUnevenRows="True" ItemsSource="{Binding Stores}" SelectedItem="{Binding SelectedStore, Mode=OneWayToSource}"/>
+            <ListView ItemTemplate="{StaticResource Template}" HasUnevenRows="True" ItemsSource="{Binding Items}" 
+                      SelectedItem="{Binding SelectedItem, Mode=OneWayToSource}" />
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

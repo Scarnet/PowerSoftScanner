@@ -1,12 +1,15 @@
 ﻿using Infrastructure.Interfaces;
 using PowerSoftScanner.Abstracts;
 using PowerSoftScanner.Business.Interfaces;
+using PowerSoftScanner.Dictionairies;
 using PowerSoftScanner.Routes;
 using Prism.Commands;
 using Prism.Navigation;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
+using Xamarin.Forms;
 
 namespace PowerSoftScanner.ViewModels
 {
@@ -25,7 +28,7 @@ namespace PowerSoftScanner.ViewModels
 
         #region Commands
         public DelegateCommand ScanCommand => new BaseCommandHandler(HandleScan);
-        public DelegateCommand<string> GetItemsCommand => new BaseCommandHandler<string>(HandleGetItems);
+        public DelegateCommand<string> GetItemsCommand => new BaseCommandHandler<string>(async (barcode)=> await HandleGetItems(barcode));
 
 
         #endregion
@@ -42,12 +45,16 @@ namespace PowerSoftScanner.ViewModels
 
         }
 
-        private void HandleGetItems(string barcode)
+        private async Task HandleGetItems(string barcode)
         {
-            var stockItems = this.stockItemContext.GetStockItem(barcode);
+            ShowLoading(Resources.Resources.GettingData);
+            var stockItems = await this.stockItemContext.GetStockItem(barcode);
             var parameters = new NavigationParameters();
-            parameters.Add("Items", stockItems);
-            NavigationService.NavigateAsync($"/{ScanRoutes.StoreList}");
+            parameters.Add(ParametersDictionairy.StockItems, stockItems);
+            Device.BeginInvokeOnMainThread(async () => {
+                var tt = await NavigationService.NavigateAsync($"/{ScanRoutes.Navigation}/{ScanRoutes.StoreList}", parameters);
+            });
+            HideLoading();
         }
 
 

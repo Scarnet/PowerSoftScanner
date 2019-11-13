@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
+using Xamarin.Forms;
 using ZXing;
 using ZXing.Net.Mobile.Forms;
 
@@ -13,8 +14,8 @@ namespace PowerSoftScanner.Barcode
     public class BarcodeScanProvider : IBarcodeScanProvider
     {
         private INavigationService navigationService;
-        private ZXingScannerPage scanPage;
-        public BarcodeScanProvider(INavigationService navigationService, ZXingScannerPage scanPage)
+        private ZXingScannerView scanPage;
+        public BarcodeScanProvider(INavigationService navigationService, ZXingScannerView scanPage)
         {
             this.navigationService = navigationService;
             this.scanPage = scanPage;
@@ -26,7 +27,7 @@ namespace PowerSoftScanner.Barcode
 
         public async Task StartScanning()
         {
-            await this.navigationService.NavigateAsync(ScanRoutes.Scanning);
+           await this.navigationService.NavigateAsync($"/{ScanRoutes.Scanning}");
         }
 
         private void InitScanningPage()
@@ -34,8 +35,9 @@ namespace PowerSoftScanner.Barcode
             this.scanPage.OnScanResult += HandleScabResult;
         }
 
-        private void HandleScabResult(Result result)
+        private async void HandleScabResult(Result result)
         {
+            Device.BeginInvokeOnMainThread( async () => await this.navigationService.NavigateAsync($"/{ScanRoutes.Navigation}/{ScanRoutes.Main}"));
             BarcodeScanned?.Invoke(this.scanPage, result.Text);
         }
     }

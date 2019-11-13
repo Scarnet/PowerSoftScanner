@@ -9,5 +9,8 @@ namespace PowerSoftScanner.Routes
         public const string Main = "Scanning_Main";
         public const string Scanning = "Scanning_Barcode";
         public const string StoreList = "Scanning_StoreList";
+        public const string ItemsList = "Scanning_ItemsList";
+        public const string StockItemDetails = "Scannig_StockItemDetails";
+        public const string Navigation = "Navigation";
     }
 }

@@ -61,11 +61,38 @@ namespace PowerSoftScanner.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Getting data.
+        /// </summary>
+        public static string GettingData {
+            get {
+                return ResourceManager.GetString("GettingData", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Scan.
         /// </summary>
         public static string Scan {
             get {
                 return ResourceManager.GetString("Scan", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Scan now.
+        /// </summary>
+        public static string ScanNow {
+            get {
+                return ResourceManager.GetString("ScanNow", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Stores list.
+        /// </summary>
+        public static string StoresList {
+            get {
+                return ResourceManager.GetString("StoresList", resourceCulture);
             }
         }
     }
