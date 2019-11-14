@@ -23,6 +23,7 @@ namespace PowerSoftScanner.Droid
             base.OnCreate(savedInstanceState);
 
             UserDialogs.Init(this);
+            Plugin.CurrentActivity.CrossCurrentActivity.Current.Init(this, savedInstanceState);
             ZXing.Net.Mobile.Forms.Android.Platform.Init();
             Xamarin.Essentials.Platform.Init(this, savedInstanceState);
             global::Xamarin.Forms.Forms.Init(this, savedInstanceState);

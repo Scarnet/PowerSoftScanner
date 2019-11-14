@@ -51,9 +51,9 @@ namespace PowerSoftScanner.ViewModels
             var stockItems = await this.stockItemContext.GetStockItem(barcode);
             var parameters = new NavigationParameters();
             parameters.Add(ParametersDictionairy.StockItems, stockItems);
-            Device.BeginInvokeOnMainThread(async () => {
-                var tt = await NavigationService.NavigateAsync($"/{ScanRoutes.Navigation}/{ScanRoutes.StoreList}", parameters);
-            });
+            Device.BeginInvokeOnMainThread(async () => 
+                await NavigationService.NavigateAsync($"/{ScanRoutes.Navigation}/{ScanRoutes.StoreList}", parameters)
+            );
             HideLoading();
         }
 

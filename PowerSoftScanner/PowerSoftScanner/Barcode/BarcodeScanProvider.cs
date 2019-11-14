@@ -1,4 +1,6 @@
 ﻿using Infrastructure.Interfaces;
+using Plugin.Permissions;
+using Plugin.Permissions.Abstractions;
 using PowerSoftScanner.Routes;
 using Prism.Navigation;
 using System;
@@ -27,7 +29,8 @@ namespace PowerSoftScanner.Barcode
 
         public async Task StartScanning()
         {
-           await this.navigationService.NavigateAsync($"/{ScanRoutes.Scanning}");
+            await CrossPermissions.Current.RequestPermissionsAsync(Permission.Camera);
+            await this.navigationService.NavigateAsync($"/{ScanRoutes.Scanning}");
         }
 
         private void InitScanningPage()
@@ -37,7 +40,7 @@ namespace PowerSoftScanner.Barcode
 
         private async void HandleScabResult(Result result)
         {
-            Device.BeginInvokeOnMainThread( async () => await this.navigationService.NavigateAsync($"/{ScanRoutes.Navigation}/{ScanRoutes.Main}"));
+            Device.BeginInvokeOnMainThread(async () => await this.navigationService.NavigateAsync($"/{ScanRoutes.Navigation}/{ScanRoutes.Main}"));
             BarcodeScanned?.Invoke(this.scanPage, result.Text);
         }
     }
